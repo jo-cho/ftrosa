@@ -1,5 +1,5 @@
-from extraction import *
-from feature_stats import *
+from .extraction import *
+from .feature_stats import *
 
 
 def get_df_spec_features(y, sr=22050, n_fft=2048, hop_length=512, n_contrast_bands=4):
@@ -176,8 +176,10 @@ def _get_stats_from_raw_feats(_all_raw_feats, song_name, stats=None):
 
 # overall
 def get_all_musical_features(path_audio, song_name, stats=None,
+                             duration=30, start=10,
                              from_harm_perc=False,
-                             chroma_harm=True, bpm_perc=True, hpr_margin=1.5,
+                             chroma_harm=True, bpm_perc=True,
+                             sr=22050, hpr_margin=1.5,
                              chroma_method_list=['stft', 'cqt', 'cens'],
                              n_contrast_bands=4, n_mfcc=12, start_bpms=[60, 120, 180]):
     """
@@ -195,7 +197,7 @@ def get_all_musical_features(path_audio, song_name, stats=None,
     :param start_bpms:
     :return:
     """
-    y = get_y_from_audio(path_audio)
+    y = get_y_from_audio(path_audio, sr=sr, duration=duration, start=start)
     y_harm, y_perc = hpss(y=y, margin=hpr_margin)
 
     _all_raw_feats = _get_all_raw_feats_from_y(y, y_harm, y_perc,

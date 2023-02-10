@@ -2,9 +2,10 @@ import numpy as np
 import librosa
 
 
-def get_y_from_audio(path_audio, sr=22050, duration=30, offset=30):
-    y, sr = librosa.load(path_audio, sr=sr, duration=duration, offset=offset)
-    y = librosa.effects.trim(y)[0]  # check if there is silence before or after the actual audio
+def get_y_from_audio(path_audio, sr=22050, duration=30, start=10, trim=True):
+    y, sr = librosa.load(path_audio, sr=sr, duration=duration, offset=start)
+    if trim is True:
+        y = librosa.effects.trim(y)[0]  # check if there is silence before or after the actual audio
     return y
 
 
