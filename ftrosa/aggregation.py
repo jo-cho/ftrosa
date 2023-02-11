@@ -1,4 +1,4 @@
-from .extraction import *
+from .features import *
 from .feature_stats import *
 
 

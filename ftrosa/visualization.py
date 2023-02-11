@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import IPython.display as ipd
 
 import librosa, librosa.display
-from .extraction import *
+from .features import *
 
 plt.rcParams['figure.figsize'] = (10, 3)
 
