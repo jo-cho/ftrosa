@@ -183,19 +183,69 @@ def get_all_musical_features(path_audio, song_name, stats=None,
                              chroma_method_list=['stft', 'cqt', 'cens'],
                              n_contrast_bands=4, n_mfcc=12, start_bpms=[60, 120, 180]):
     """
-    Get all musical features
-    :param path_audio: path of an audio file
-    :param song_name: song name in string
-    :param stats: default is None = ['mean','std','skew','kurt','max','min']
-    :param from_harm_perc:
-    :param chroma_harm:
-    :param bpm_perc:
-    :param hpr_margin:
-    :param chroma_method_list:
-    :param n_contrast_bands:
-    :param n_mfcc:
-    :param start_bpms:
-    :return:
+    Get all musical features from audio file. The features extracted using Librosa.
+
+    Paramters
+    ---------
+    :param path_audio: (string)
+        File path of your audio (.wav)
+
+    :param song_name: (string)
+        Your song name
+
+    :param stats: (list or None)
+        A list of stats for array-like features
+        Default is None, which return all stats: ['mean','std','skew','kurt','max','min']
+
+    :param duration: (int)
+        The duration of the audio you want to load (in seconds)
+        Default is 30 seconds
+
+    :param start: (int)
+        The start time of the audio you want to load (in seconds)
+        Default is 10
+
+    :param from_harm_perc: (bool)
+        If True, features are extracted from both harmonic and percussive part of the audio
+        Default is False
+
+    :param chroma_harm: (bool)
+        If True, for the extraction of chroma features, you use only harmonic parts (recommended)
+        Default is True
+
+    :param bpm_perc: (bool)
+        If True, for the extraction of percussive features, you use only percussive parts (recommended)
+        Default is True
+
+    :param sr: (int)
+        Sampling rate
+        Default is 22050 (recommended)
+
+    :param hpr_margin: (float)
+        Harmony-Percussive-Residual margin for decomposition / Should be a float over 1
+        Default is 1.5
+
+    :param chroma_method_list: (list)
+        A method used for obtain chromagram / choose one or multiple in ['stft', 'cqt', 'cens']
+        Default is ['stft', 'cqt', 'cens']
+
+    :param n_contrast_bands: (int)
+        Number of sub-bands to extract from Spectral Contrast
+        Default is 4
+
+    :param n_mfcc: (int)
+        Number of MFCC to extract
+        Default is 12
+
+    :param start_bpms: (list)
+        list of initial bpms to estimate bpm / Can be one or many
+        Default is [60, 120, 180]
+
+    Return
+    -------
+    :return: (pandas DataFrame)
+        DataFrame of n features (n rows × 1 columns)
+
     """
     y = get_y_from_audio(path_audio, sr=sr, duration=duration, start=start)
     y_harm, y_perc = hpss(y=y, margin=hpr_margin)
