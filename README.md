@@ -182,3 +182,5 @@ returns
 
 
 
+--- 
+[Librosa citations](https://zenodo.org/record/7618817#.Y-n1tHZByUk)
