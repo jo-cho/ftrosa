@@ -10,7 +10,7 @@ setup(
     author='Cheonghyo Cho',
     author_email='jhcho1016@gmail.com',
 
-    py_modules=['ftrosa'],
+    #py_modules=['ftrosa'],
     packages = ['ftrosa'],
     install_requires=['librosa>=0.9.2','numpy','pandas','matplotlib']
 )
