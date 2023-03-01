@@ -5,7 +5,8 @@
 
 **You can extract every musical audio features featured in [Librosa](https://github.com/librosa/librosa) in one function.**
 
-
+> How to install the package:
+`pip install git+https://github.com/jo-cho/ftrosa.git`
 
 ## What is musical audio features?
 
